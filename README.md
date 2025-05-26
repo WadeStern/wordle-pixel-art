@@ -18,13 +18,14 @@ Make sure Python 3 is installed
 Run this script to create a file that maps each guess word to its feedback pattern for a given target word.
 
 Command:
-python3 generate_patterns.py
+python3 generate_patterns.py --target <target_word>
 
-You'll be prompted:
-Enter the target word:
+Example:
+python3 generate_patterns.py --target stone
 
 This creates a file at:
-output/<target>.txt
+output/stone.txt
+
 Containing lines like:
 crane 20202
 glove 01010

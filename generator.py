@@ -1,4 +1,5 @@
 import os
+import argparse
 
 def get_feedback(guess, target):
     feedback = ['0'] * 5
@@ -36,12 +37,16 @@ def write_results(wordlist, target, out_dir="output"):
             f.write(f"{guess} {pattern}\n")
 
 if __name__ == "__main__":
-    wordlist = load_words("words.txt")  # full guess list
-    target = input("Enter the target word: ").strip().lower()
+    parser = argparse.ArgumentParser(description="Generate feedback patterns for Wordle guesses.")
+    parser.add_argument("--target", required=True, help="The 5-letter target word.")
+    args = parser.parse_args()
+
+    target = args.target.strip().lower()
 
     if len(target) != 5:
         print("Target word must be 5 letters.")
         exit()
 
+    wordlist = load_words("words.txt")
     write_results(wordlist, target)
     print(f"Output written to output/{target}.txt")
