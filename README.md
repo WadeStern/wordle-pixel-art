@@ -16,7 +16,7 @@ This tool helps you explore Wordle feedback patterns to generate "pixel art" usi
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-
+```
 
 ## Scripts:
 
