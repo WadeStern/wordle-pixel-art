@@ -2,15 +2,21 @@
 
 This tool helps you explore Wordle feedback patterns to generate "pixel art" using Wordle guesses. It supports:
 
-Generating feedback patterns for a given target word
+- Generating feedback patterns for a given target word
+- Searching for guess words that produce a specific pattern (e.g., green-gray-yellow)
+- Interactive frontend to visualize patterns
 
-Searching for guess words that produce a specific pattern (e.g., green-gray-yellow)
+## Setup
 
-## Setup:
+1. Clone this repo
+2. Make sure Python 3 is installed
+3. Create and activate a virtual environment:
 
-Clone this repo
+### macOS/Linux:
+```bash
+python3 -m venv venv
+source venv/bin/activate
 
-Make sure Python 3 is installed
 
 ## Scripts:
 
