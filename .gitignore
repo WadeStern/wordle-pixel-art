@@ -1,2 +1,13 @@
+# Ignore Python virtual environments
+venv/
+.venv/
+
 # Ignore all files in output/ that contain "words"
-output/*
+output/*words*
+
+# Optional: ignore __pycache__ and other Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
