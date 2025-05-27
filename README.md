@@ -17,7 +17,17 @@ This tool helps you explore Wordle feedback patterns to generate "pixel art" usi
 python3 -m venv venv
 source venv/bin/activate
 ```
+### Windows (Command Prompt):
+```cmd
+python -m venv venv
+venv\Scripts\activate
+```
 
+Install dependencies:
+
+```bash
+pip install flask
+```
 ## Scripts:
 
 ### Generate Feedback Data
