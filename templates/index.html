@@ -43,6 +43,7 @@
       cursor: pointer;
       background-color: #787c7e; /* gray */
       color: white;
+      user-select: none;
     }
 
     .yellow { background-color: #c9b458; }
@@ -55,6 +56,7 @@
 
   <input type="text" id="target" placeholder="Target word" maxlength="5" />
   <button onclick="submitPatterns()">Submit</button>
+  <button onclick="resetGrid()">Reset</button>
 
   <div id="grid"></div>
 
@@ -86,6 +88,8 @@
     }
 
     function submitPatterns() {
+      document.activeElement.blur(); // remove focus from any button or input
+
       const target = document.getElementById("target").value.trim().toLowerCase();
       if (target.length !== 5) {
         alert("Target word must be 5 letters.");
@@ -106,12 +110,29 @@
             feedbackMap[item.pattern].push(item.word);
           }
 
-          // For each row, generate pattern and try to match a word
+          const usedWords = new Set();
+
           for (let row = 0; row < 6; row++) {
             const pattern = state[row].join("");
-            const match = (feedbackMap[pattern] || [])[0] || "";
+            const possibleWords = feedbackMap[pattern] || [];
 
-            // Fill cells with the guess word (or blank)
+            // Try to find a word not yet used
+            let match = "";
+            for (const word of possibleWords) {
+              if (!usedWords.has(word)) {
+                match = word;
+                usedWords.add(word);
+                break;
+              }
+            }
+
+            // If all were used or none are available, fallback to first or blank
+            if (!match && possibleWords.length > 0) {
+              match = possibleWords[0];
+              usedWords.add(match);
+            }
+
+            // Fill in the row with the matched word (or blank)
             for (let col = 0; col < 5; col++) {
               const cellIndex = row * 5 + col;
               const cell = grid.children[cellIndex];
@@ -123,6 +144,26 @@
           alert("Error loading guesses");
           console.error(err);
         });
+    }
+
+    function resetGrid() {
+      for (let row = 0; row < 6; row++) {
+        for (let col = 0; col < 5; col++) {
+          const i = row * 5 + col;
+          const cell = grid.children[i];
+
+          // Reset visual
+          cell.textContent = "";
+          cell.classList.remove("gray", "yellow", "green");
+          cell.classList.add("gray");
+
+          // Reset state
+          state[row][col] = 0;
+        }
+      }
+
+      document.getElementById("target").value = "";
+      document.activeElement.blur();
     }
   </script>
 
